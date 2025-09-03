@@ -1,0 +1,23 @@
+# Arquivo de senhas e configurações de ambiente
+.env
+
+# Pasta com os dados brutos (documentos, código clonado, etc.)
+# Geralmente não versionamos os dados, apenas o código que os processa.
+/data/
+
+# Pasta do Vector Store (são arquivos gerados e grandes)
+/vector_store/
+
+# Arquivos de cache e dependências do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+
+# Dependências do Docker (se aplicável, para o futuro)
+vendor/
+node_modules/

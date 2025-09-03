@@ -1,0 +1,41 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: ai_postgres
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  etl:
+    build: .
+    container_name: ai_etl
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env
+    volumes:
+      # --- LINHA ADICIONADA ---
+      # Espelha o código local para dentro do container em tempo real
+      - .:/app
+      - ./data:/app/data
+      - ./vector_store:/app/vector_store
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  postgres_data:

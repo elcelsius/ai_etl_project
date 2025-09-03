@@ -1,0 +1,24 @@
+# Core de IA e Embeddings
+langchain
+langchain-core
+langchain-community
+langchain-huggingface
+sentence-transformers
+faiss-gpu
+torch
+
+# Pinamos a versão do NumPy para garantir compatibilidade com faiss-gpu
+numpy==1.26.4
+
+# Biblioteca da API do Google Gemini
+google-generativeai
+
+# Loaders de Documentos
+pypdf
+python-docx
+unstructured[md]
+
+# Banco de Dados e Configuração
+psycopg2-binary
+python-dotenv
+sqlalchemy
